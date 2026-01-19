@@ -1,5 +1,5 @@
 from a_star import astar
-from ant_system import AntSystem
+from ant_system import AntSystem, ElitistAntSystem
 from area_generator import create_area
 from print_utils import pprint_area, pprint_tour
 
@@ -9,8 +9,9 @@ def main():
 
     astar_path = astar(area)
     AS = AntSystem(area, num_of_ants=3, elites=3, alpha=2.0, beta=1.0, evaporation=0.1)
+    EAS = ElitistAntSystem(area, num_of_ants=3, elites=3, alpha=2.0, beta=1.0, evaporation=0.1)
 
-    systems = {"AS": AS}
+    systems = {"AS": AS, "EAS": EAS}
     best_ants = []
     for name, s in systems.items():
         best_ant = s.run(100)
@@ -26,7 +27,8 @@ def main():
     pprint_tour(area, best_ant)
     if best_system == "AS":
         print("ant system is the best")
-
+    elif best_system == "EAS":
+        print("elitist ant system is the best")
 
 if __name__ == "__main__":
     main()

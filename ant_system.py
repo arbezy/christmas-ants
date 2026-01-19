@@ -67,6 +67,35 @@ class AntSystem:
 
         return ants 
     
+class ElitistAntSystem(AntSystem):
+
+    def run(self, generations: int) -> 'Ant':
+        bounds = len(self.attractiveness) - 1
+        ants = [Ant(len(self.attractiveness) - 1, self.alpha, self.beta) for _ in range(self.ant_num)]
+        
+        best_ant = Ant(bounds, self.alpha, self.beta)
+        best_ant.tour_score = float('inf')
+
+        for g in range(generations):
+            # create tours for each ant
+            ants = self._get_solutions(ants)
+            ants.sort(key=lambda a: a.tour_score)
+
+            # check for new best ant
+            if ants[0].tour_score < best_ant.tour_score:
+                best_ant = ants[0]
+
+            # update pheromone matrix
+            elite_ants = ants[:self.elites] + [best_ant]
+            self._pheromone_update(elite_ants)
+
+        # return ant with the best score at the end of all generations
+        ants.sort(key=lambda a: a.tour_score)
+        return ants[0]
+        # NOTE: could also just return 'best_ant' here, but I feel as though it is more fair between
+        # systems to use the best from the final generation
+
+
 class Ant:
     def __init__(self, area_bounds, alpha, beta, backtrack_limit=10):
         self.position = (0,0)
