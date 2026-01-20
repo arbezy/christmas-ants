@@ -72,7 +72,7 @@ class AntSystem:
 
         # generate solution for each ant
         for a in ants:
-            a.genenerate_solution(self.pher_mat, self.attractiveness)
+            a.generate_solution(self.pher_mat, self.attractiveness)
 
         return ants
 
