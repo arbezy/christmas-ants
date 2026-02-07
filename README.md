@@ -1,5 +1,5 @@
 # Christmas Ant Colony Algs
-Had a free couple of days before christmas so made some fun ant algorithm!
+Had a free couple of days before christmas so made some fun ant algorithms!
 Also includes 2D maze generation using disjoint set, and a quick A* to compare against.
 
 2D mazes are not really the best domain for ants to show off their skills, would be better to stick into a weighted graph I think!
